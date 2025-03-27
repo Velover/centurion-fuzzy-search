@@ -56,14 +56,14 @@ function getMatches(
 
 	type Result = [number, string, number];
 
-	const results = strings.map((str, i) => [i, str, str.size()]);
+	const results = strings.map((str, i) => [i, str, str.size()]) as Result[];
 	const sortedStrings = FuzzySearch.Sorting.FuzzyScore(
 		processedStrings,
 		text,
-		results as never,
+		results,
 	).filter(([score]) => score > 0);
 
-	return sortedStrings.map(([score, value]) => value as never as Result);
+	return sortedStrings.map(([_, value]) => value);
 }
 
 export function getArgumentSuggestion(arg: Argument, textPart?: string) {
