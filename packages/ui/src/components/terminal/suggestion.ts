@@ -7,6 +7,7 @@ import {
 	SingleArgumentType,
 } from "@rbxts/centurion";
 import { ReadonlyDeep } from "@rbxts/centurion/out/shared/util/data";
+import { FuzzySearch } from "@rbxts/fuzzy-search";
 import { Players } from "@rbxts/services";
 import { ArgumentSuggestion, CommandSuggestion } from "../../types";
 import { containsSpace, getQuoteChar } from "../../utils/string";
@@ -38,26 +39,27 @@ function getMatches(
 		});
 	}
 
-	const textLower = text.lower();
-	const textEndIndex = text.size();
 	const quoteChar = getQuoteChar(text);
 	const quoted = quoteChar !== undefined;
 
-	const results: [number, string, number][] = [];
-	for (const i of $range(0, strings.size() - 1)) {
-		let str = strings[i];
+	const processedStrings = strings.map((str) => {
 		if (quoted) {
-			str = `${quoteChar}${str}${quoteChar}`;
-		} else if (containsSpace(str)) {
-			str = `"${str}"`;
+			return `${quoteChar}${str}${quoteChar}`;
 		}
 
-		const part = str.lower().sub(0, textEndIndex);
-		if (part === textLower) {
-			results.push([i, str, str.size()]);
+		if (containsSpace(str)) {
+			return `"${str}"`;
 		}
-	}
-	return results.sort((a, b) => a[1] < b[1]);
+
+		return str;
+	});
+
+	const sortedStrings = FuzzySearch.Sorting.FuzzyScore(
+		processedStrings,
+		text,
+	).filter(([score]) => score > 0);
+
+	return sortedStrings.map(([score, value], i) => [i, value, value.size()]);
 }
 
 export function getArgumentSuggestion(arg: Argument, textPart?: string) {

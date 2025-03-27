@@ -85,6 +85,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@rbxts/fuzzy-search':
+        specifier: ^1.0.3
+        version: 1.0.3
       '@rbxts/services':
         specifier: ^1.5.5
         version: 1.5.5
@@ -854,6 +857,9 @@ packages:
 
   '@rbxts/compiler-types@3.0.0-types.0':
     resolution: {integrity: sha512-VGOHJPoL7+56NTatMGqQj3K7xWuzEV+aP4QD5vZiHu+bcff3kiTmtoadaF6NkJrmwfFAvbsd4Dg764ZjWNceag==}
+
+  '@rbxts/fuzzy-search@1.0.3':
+    resolution: {integrity: sha512-CK8YdlyuP+dZ6NAtb1jrQ9rpSHmwpj4qpwxlrEDROCIZ6hojpxO3tWrRgJcmTuHAGWW/xfFSHMZ6lmmIwTVUTA==}
 
   '@rbxts/jest-globals@0.1.0':
     resolution: {integrity: sha512-k6sPSVfohlHRLLBT+LuK5xhWy87YzNg7LpcWmPkzXZUUM6iUU+uXWtphegcT+fR4ZHRXFt0tjDepA61uMRQQQA==}
@@ -3552,6 +3558,8 @@ snapshots:
   '@rbxts/beacon@2.1.1': {}
 
   '@rbxts/compiler-types@3.0.0-types.0': {}
+
+  '@rbxts/fuzzy-search@1.0.3': {}
 
   '@rbxts/jest-globals@0.1.0':
     dependencies:

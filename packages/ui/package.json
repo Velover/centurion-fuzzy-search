@@ -40,6 +40,7 @@
         "typescript": "5.5.3"
     },
     "dependencies": {
+        "@rbxts/fuzzy-search": "^1.0.3",
         "@rbxts/services": "^1.5.5",
         "@rbxts/set-timeout": "^1.1.2",
         "@rbxts/vide": "^0.5.3"
